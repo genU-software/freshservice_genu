@@ -3,4 +3,6 @@ body {
 }
 .bundle-item-fields-222 div[Yes] {
   color: limegreen !important;
+  border: solid 1px
+    linear-gradient(hsl(180, 100%, 25%) 30%, hsl(64, 87%, 35%) 90%) !important;
 }
