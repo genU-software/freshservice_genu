@@ -1,6 +1,6 @@
 body {
   background: red !important;
 }
-bundle-item-fields-222 div[Yes] {
+.bundle-item-fields-222 div[Yes] {
   color: limegreen !important;
 }
