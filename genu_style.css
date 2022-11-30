@@ -1,7 +1,7 @@
 body {
   background: red !important;
 }
-#bundle-item-fields-222 {
+form {
   background: blue;
 }
 #bundle-item-fields-222 div[Yes] {
