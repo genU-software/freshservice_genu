@@ -1,11 +1,35 @@
-body {
-  background: red !important;
+#bundle-item-fields-222
+  .field_placeholder_222_703d2c11-d469-4523-a431-60407e2a936a {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
-form {
-  background: blue;
+#bundle-item-fields-222 .static_rich_text {
+  width: 100%;
 }
-#bundle-item-fields-222 div[Yes] {
-  color: limegreen !important;
-  border: solid 1px
-    linear-gradient(hsl(180, 100%, 25%) 30%, hsl(64, 87%, 35%) 90%) !important;
+
+#bundle-item-fields-222 .custom_checkbox .control-label label {
+  margin: 27px 5px !important;
+  width: 150px !important;
+}
+#bundle-item-fields-222 .custom_checkbox .control-label label {
+  content: "Lunch Break";
+}
+#bundle-item-fields-222 .control-element input[type="text"] {
+  width: 250px !important;
+}
+#bundle-item-fields-222 .control-element input[type="checkbox"] {
+  margin: 30px 10px;
+}
+#bundle-item-fields-222
+  .custom-field:has(.control-element > .required[type="text"]) {
+  width: 100%;
+  padding: 20px !important;
+  background: linear-gradient(
+    40deg,
+    hsl(225deg 50% 50% / 34%) 80%,
+    hsl(276deg 50% 50% / 42%)
+  );
+  border-radius: 3px;
+  border: 1px solid hsl(276deg 50% 50% / 42%);
 }
