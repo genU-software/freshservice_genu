@@ -42,4 +42,5 @@ if (timeRegExLong.test(testString)) {
   startTime = toDateWithOutTimeZone(timeArray[0][0]);
   endTime = toDateWithOutTimeZone(timeArray[1][0]);
   timeDiff = (endTime - startTime) / 1000 / 60;
+  console.log(toTimeString(timeDiff));
 }
