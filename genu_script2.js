@@ -44,3 +44,4 @@ if (timeRegExLong.test(testString)) {
   timeDiff = (endTime - startTime) / 1000 / 60;
   console.log(toTimeString(timeDiff));
 }
+console.log("genu script added");
