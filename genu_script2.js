@@ -47,6 +47,7 @@ function calcTime(e) {
 }
 
 window.onload = function () {
+  console.log("Page loaded");
   /* Add event listner to all time input fields */
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
