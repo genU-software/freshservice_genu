@@ -32,18 +32,18 @@ function toTimePhrase(minutes) {
   return time;
 }
 
-function calcTime(e) {
+function calcTime(event) {
   let timeArray = [];
-  let timeInput = e.value;
+  let targetElement = event.target;
+  let timeInput = targetElement.value;
 
-  if (timeRegExLong.test(e.value)) {
+  if (timeRegExLong.test(timeInput)) {
     timeArray = [...testString.matchAll(timeRegEx)];
     startTime = toDateWithOutTimeZone(timeArray[0][0]);
     endTime = toDateWithOutTimeZone(timeArray[1][0]);
     timeDiff = (endTime - startTime) / 1000 / 60;
     console.log(toTimeString(timeDiff));
   }
-  console.log(e.value);
 }
 
 window.onload = function () {
@@ -52,7 +52,7 @@ window.onload = function () {
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
     .forEach((item) => {
-      item.addEventListener("input", calcTime());
+      item.addEventListener("change", calcTime());
     });
 
   console.log("genu script added");
