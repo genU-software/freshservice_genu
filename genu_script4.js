@@ -34,7 +34,7 @@ function toTimePhrase(minutes) {
 
 function calcTime(event) {
   let timeArray = [];
-  let targetElement = event.target;
+  let targetElement = document.querySelector(event.target);
   let timeInput = targetElement.value;
 
   if (timeRegExLong.test(timeInput)) {
