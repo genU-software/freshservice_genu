@@ -34,25 +34,36 @@ function toTimePhrase(minutes) {
 
 function calcTime(event) {
   let timeArray = [];
-  let targetElement = document.querySelector(event.target);
-  let timeInput = targetElement.value;
 
+  let targetElement = event.target;
+  let timeInput = targetElement.value;
+  console.log("in calcTime function");
   if (timeRegExLong.test(timeInput)) {
     timeArray = [...timeInput.matchAll(timeRegEx)];
     startTime = toDateWithOutTimeZone(timeArray[0][0]);
     endTime = toDateWithOutTimeZone(timeArray[1][0]);
     timeDiff = (endTime - startTime) / 1000 / 60;
+    targetElement.nextElementSibling.innerHTML = toTimePhrase(timeDiff);
     console.log(toTimeString(timeDiff));
   }
 }
 
 window.onload = function () {
   console.log("Page loaded");
+  /* Create new element tohold time information */
+  document
+    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
+    .forEach((item) => {
+      let newLabel = document.createElement("label");
+      newLabel.classList.add("timeMessage");
+      item.after(newLabel);
+    });
+
   /* Add event listner to all time input fields */
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
     .forEach((item) => {
-      item.addEventListener("change", calcTime());
+      item.addEventListener("change", calcTime);
     });
 
   console.log("genu script added");
