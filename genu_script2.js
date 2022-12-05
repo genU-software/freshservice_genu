@@ -46,11 +46,13 @@ function calcTime(e) {
   console.log(e.value);
 }
 
-/* Add event listner to all time input fields */
-document
-  .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
-  .forEach((item) => {
-    item.addEventListener("input", calcTime());
-  });
+window.onload = function () {
+  /* Add event listner to all time input fields */
+  document
+    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
+    .forEach((item) => {
+      item.addEventListener("input", calcTime());
+    });
 
-console.log("genu script added");
+  console.log("genu script added");
+};
