@@ -38,7 +38,7 @@ function calcTime(event) {
   let timeInput = targetElement.value;
 
   if (timeRegExLong.test(timeInput)) {
-    timeArray = [...testString.matchAll(timeRegEx)];
+    timeArray = [...timeInput.matchAll(timeRegEx)];
     startTime = toDateWithOutTimeZone(timeArray[0][0]);
     endTime = toDateWithOutTimeZone(timeArray[1][0]);
     timeDiff = (endTime - startTime) / 1000 / 60;
