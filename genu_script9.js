@@ -32,11 +32,12 @@ function toTimePhrase(minutes) {
   return time;
 }
 
+// Event Handler for changing time
 function calcTime(event) {
   let timeArray = [];
-
   let target = event.target;
-  console.log("in calcTime function");
+
+  addTimeMessage();
   if (
     target.closest("#bundle-item-fields-222") != null &&
     target.closest(".control-element") != null &&
@@ -61,16 +62,20 @@ function calcTime(event) {
   }
 }
 
-window.onload = function () {
-  /* Create new element tohold time information */
-  document
-    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
-    .forEach((item) => {
-      let newLabel = document.createElement("label");
-      newLabel.classList.add("timeMessage");
-      item.after(newLabel);
-    });
+/* Create new element tohold time information */
+function addTimeMessage() {
+  if (!document.querySelectorAll(".timeMessage").length > 0) {
+    document
+      .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
+      .forEach((item) => {
+        let newLabel = document.createElement("label");
+        newLabel.classList.add("timeMessage");
+        item.after(newLabel);
+      });
+  }
+}
 
+window.onload = function () {
   /* Add event listner to all time input fields */
   document.querySelectorAll("#page-main").forEach((item) => {
     item.addEventListener("change", calcTime);
