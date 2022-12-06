@@ -42,8 +42,8 @@ function calcTime(event) {
     target.closest(".control-element") != null &&
     target.type == "text"
   ) {
-    let timeInput = targetElement.value;
-    let messageElement = targetElement.nextElementSibling;
+    let timeInput = target.value;
+    let messageElement = target.nextElementSibling;
     if (timeRegExLong.test(timeInput)) {
       timeArray = [...timeInput.matchAll(timeRegEx)];
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
