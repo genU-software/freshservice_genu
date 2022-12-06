@@ -49,12 +49,12 @@ function calcTime(event) {
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
       endTime = toDateWithOutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
-      messageElement.classList.remove("warning");
+      // messageElement.classList.remove("warning");
       messageElement.innerHTML = toTimePhrase(timeDiff);
       console.log(toTimeString(timeDiff));
     } else {
       messageElement.innerHTML = "Time format incorrect. '09:00-5:06'";
-      messageElement.classList.add("warning");
+      // messageElement.classList.add("warning");
     }
   }
 }
