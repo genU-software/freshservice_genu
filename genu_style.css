@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   flex-direction: row;
 }
+
 #bundle-item-fields-222 .static_rich_text {
   width: 100%;
 }
@@ -12,15 +13,21 @@
   margin: 27px 5px !important;
   width: 150px !important;
 }
+
 #bundle-item-fields-222 .custom_checkbox .control-label label {
   content: "Lunch Break";
 }
+
 #bundle-item-fields-222 .control-element input[type="text"] {
   width: 250px !important;
+  display: flex;
+  flex-wrap: nowrap;
 }
+
 #bundle-item-fields-222 .control-element input[type="checkbox"] {
   margin: 30px 10px;
 }
+
 #bundle-item-fields-222
   .custom-field:has(.control-element > .required[type="text"]) {
   width: 100%;

@@ -35,21 +35,31 @@ function toTimePhrase(minutes) {
 function calcTime(event) {
   let timeArray = [];
 
-  let targetElement = event.target;
-  let timeInput = targetElement.value;
+  let target = event.target;
   console.log("in calcTime function");
-  if (timeRegExLong.test(timeInput)) {
-    timeArray = [...timeInput.matchAll(timeRegEx)];
-    startTime = toDateWithOutTimeZone(timeArray[0][0]);
-    endTime = toDateWithOutTimeZone(timeArray[1][0]);
-    timeDiff = (endTime - startTime) / 1000 / 60;
-    targetElement.nextElementSibling.innerHTML = toTimePhrase(timeDiff);
-    console.log(toTimeString(timeDiff));
+  if (
+    target.closest("#bundle-item-fields-222") != null &&
+    target.closest(".control-element") != null &&
+    target.type == "text"
+  ) {
+    let timeInput = targetElement.value;
+    let messageElement = targetElement.nextElementSibling;
+    if (timeRegExLong.test(timeInput)) {
+      timeArray = [...timeInput.matchAll(timeRegEx)];
+      startTime = toDateWithOutTimeZone(timeArray[0][0]);
+      endTime = toDateWithOutTimeZone(timeArray[1][0]);
+      timeDiff = (endTime - startTime) / 1000 / 60;
+      messageElement.classList.remove("warning");
+      messageElement.innerHTML = toTimePhrase(timeDiff);
+      console.log(toTimeString(timeDiff));
+    } else {
+      messageElement.innerHTML = "Time format incorrect. '09:00-5:06'";
+      messageElement.classList.add("warning");
+    }
   }
 }
 
 window.onload = function () {
-  console.log("Page loaded");
   /* Create new element tohold time information */
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
@@ -60,11 +70,8 @@ window.onload = function () {
     });
 
   /* Add event listner to all time input fields */
-  document
-    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
-    .forEach((item) => {
-      item.addEventListener("change", calcTime);
-    });
-
+  document.querySelectorAll("#page-main").forEach((item) => {
+    item.addEventListener("change", calcTime);
+  });
   console.log("genu script added");
 };
