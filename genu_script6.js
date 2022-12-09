@@ -2,6 +2,25 @@ const timeRegExLong = new RegExp(
   "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]s?-s?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
 ); // Test for valid full string eg 09:00-10:00
 const timeRegEx = new RegExp("([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]", "g"); // Match times from string
+var isInitComplete = false;
+
+function returnTotalElement() {
+  return document.querySelector(
+    "#bundle-details-222 .custom_text .field.text[name='requested_item_values[222][requested_item_value_attributes][cf_total_hours_fortnight_387449]']"
+  );
+}
+
+function returnWeek1Total() {
+  return document.querySelector(
+    "#bundle-details-222 .custom_text .field.text[name='requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_11_387449]']"
+  );
+}
+
+function returnWeek2Total() {
+  return document.querySelector(
+    "#bundle-details-222 .custom_text .field.text[name='requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]']"
+  );
+}
 
 function toDateWithOutTimeZone(date) {
   let tempTime = date.split(":");
@@ -37,7 +56,10 @@ function calcTime(event) {
   let timeArray = [];
   let target = event.target;
 
-  addTimeMessage();
+  if (!isInitComplete) {
+    genuCCInitit();
+    isInitComplete = true;
+  }
   if (
     target.closest("#bundle-item-fields-222") != null &&
     target.closest(".control-element") != null &&
@@ -62,10 +84,15 @@ function calcTime(event) {
 
 /* Create new element tohold time information */
 function addTimeMessage() {
+  let eleTotal = returnTotalElement();
+  let eleWeek1Total = returnWeek1Total();
+  let eleWeek2Total = returnWeek2Total();
   if (!document.querySelectorAll(".timeMessage").length > 0) {
     document
       .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
       .forEach((item) => {
+        if (item == eleTotal || item == eleWeek1Total || item == eleWeek2Total)
+          return;
         let newLabel = document.createElement("label");
         newLabel.classList.add("timeMessage");
         item.after(newLabel);
@@ -76,12 +103,14 @@ function addTimeMessage() {
 /* Calculate total time per week */
 function calculateWeek() {
   let totalTime = 0;
-  let eleTotal = document.querySelector(
-    "#bundle-details-222 .custom_text .control-element input.field.text.required"
-  );
+  let eleTotal = returnTotalElement();
+  let eleWeek1Total = returnWeek1Total();
+  let eleWeek2Total = returnWeek2Total();
+
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
     .forEach((item) => {
+      if (item == eleWeek1Total || item == eleWeek2Total) return;
       let timeInput = item.value;
       if (timeRegExLong.test(timeInput)) {
         timeArray = [...timeInput.matchAll(timeRegEx)];
@@ -92,6 +121,23 @@ function calculateWeek() {
       }
     });
   eleTotal.value = toTimePhrase(totalTime);
+}
+
+function enableReadOnlyInputs() {
+  let eleTotal = returnTotalElement();
+  let eleWeek1Total = returnWeek1Total();
+  let eleWeek2Total = returnWeek2Total();
+
+  returnTotalElement.readOnly = true;
+  returnWeek1Total.readOnly = true;
+  returnWeek2Total.readOnly = true;
+}
+
+function isInitComplete() {
+  // adds a label used to show the time under each input
+  addTimeMessage();
+  // makes the total fields read-only
+  enableReadOnlyInputs();
 }
 
 window.onload = function () {
