@@ -43,21 +43,19 @@ function calcTime(event) {
     target.closest(".control-element") != null &&
     target.type == "text"
   ) {
-    console.log(target);
     let timeInput = target.value;
     let messageElement = target.nextElementSibling;
-    console.log(messageElement);
     if (timeRegExLong.test(timeInput)) {
       timeArray = [...timeInput.matchAll(timeRegEx)];
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
       endTime = toDateWithOutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
-      // messageElement.classList.remove("warning");
+      messageElement.classList.remove("warning");
       messageElement.innerHTML = toTimePhrase(timeDiff);
-      console.log(toTimeString(timeDiff));
+      calculateWeek();
     } else {
       messageElement.innerHTML = "Time format incorrect. '09:00-5:06'";
-      // messageElement.classList.add("warning");
+      messageElement.classList.add("warning");
     }
   }
 }
@@ -73,6 +71,26 @@ function addTimeMessage() {
         item.after(newLabel);
       });
   }
+}
+
+/* Calculate total time per week */
+function calculateWeek() {
+  let totalTime = 0;
+  let eleTotal = document.querySelector(
+    "#222_50bf9508-fa10-433f-84a3-d8f832ed21d0"
+  );
+  document
+    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
+    .forEach((item) => {
+      if (timeRegExLong.test(timeInput)) {
+        timeArray = [...timeInput.matchAll(timeRegEx)];
+        startTime = toDateWithOutTimeZone(timeArray[0][0]);
+        endTime = toDateWithOutTimeZone(timeArray[1][0]);
+        timeDiff = (endTime - startTime) / 1000 / 60;
+        totalTime += timeDiff;
+      }
+    });
+  eleTotal.innerHTML(toTimePhrase(totalTime));
 }
 
 window.onload = function () {
