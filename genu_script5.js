@@ -91,7 +91,7 @@ function calculateWeek() {
         totalTime += timeDiff;
       }
     });
-  eleTotal.innerHTML(toTimePhrase(totalTime));
+  eleTotal.value = toTimePhrase(totalTime);
 }
 
 window.onload = function () {
