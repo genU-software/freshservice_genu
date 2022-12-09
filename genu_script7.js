@@ -56,10 +56,7 @@ function calcTime(event) {
   let timeArray = [];
   let target = event.target;
 
-  if (!isInitComplete) {
-    genuCCInitit();
-    isInitComplete = true;
-  }
+  if (!isInitComplete) genuCCInitit();
   if (
     target.closest("#bundle-item-fields-222") != null &&
     target.closest(".control-element") != null &&
@@ -133,11 +130,12 @@ function enableReadOnlyInputs() {
   returnWeek2Total.readOnly = true;
 }
 
-function isInitComplete() {
+function genuCCInitit() {
   // adds a label used to show the time under each input
   addTimeMessage();
   // makes the total fields read-only
   enableReadOnlyInputs();
+  isInitComplete = true;
 }
 
 window.onload = function () {
