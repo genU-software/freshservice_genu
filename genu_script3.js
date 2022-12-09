@@ -77,7 +77,7 @@ function addTimeMessage() {
 function calculateWeek() {
   let totalTime = 0;
   let eleTotal = document.querySelector(
-    "#222_50bf9508-fa10-433f-84a3-d8f832ed21d0"
+    "#bundle-details-222 .custom_text .control-element input.field.text.required"
   );
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
