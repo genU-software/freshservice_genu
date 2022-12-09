@@ -82,6 +82,7 @@ function calculateWeek() {
   document
     .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
     .forEach((item) => {
+      let timeInput = item.value;
       if (timeRegExLong.test(timeInput)) {
         timeArray = [...timeInput.matchAll(timeRegEx)];
         startTime = toDateWithOutTimeZone(timeArray[0][0]);
