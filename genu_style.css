@@ -1,3 +1,18 @@
+:is(
+    #bundle-details-222
+      .custom_text
+      .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_fortnight_387449]"],
+    #bundle-details-222
+      .custom_text
+      .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_11_387449]"],
+    #bundle-details-222
+      .custom_text
+      .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]"]
+  ) {
+  pointer-events: none;
+  user-select: none;
+}
+
 #bundle-item-fields-222
   .field_placeholder_222_703d2c11-d469-4523-a431-60407e2a936a {
   display: flex;

@@ -71,7 +71,7 @@ function calcTime(event) {
       timeDiff = (endTime - startTime) / 1000 / 60;
       messageElement.classList.remove("warning");
       messageElement.innerHTML = toTimePhrase(timeDiff);
-      calculateWeek();
+      calculateWeeks();
     } else {
       messageElement.innerHTML = "Time format incorrect. '09:00-5:06'";
       messageElement.classList.add("warning");
@@ -98,26 +98,40 @@ function addTimeMessage() {
 }
 
 /* Calculate total time per week */
-function calculateWeek() {
-  let totalTime = 0;
+function calculateWeeks() {
+  let week1TotalTime = 0;
+  let week2TotalTime = 0;
   let eleTotal = returnTotalElement();
   let eleWeek1Total = returnWeek1Total();
   let eleWeek2Total = returnWeek2Total();
+  // select all the inputs and group them into weeks
+  let inputs = Array.from(
+    document.querySelectorAll("#bundle-details-222 input.text:nth-child(1)")
+  );
+  let week1inputs = inputs.slice(0, 7);
+  let week2inputs = inputs.slice(8, 15);
 
-  document
-    .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
-    .forEach((item) => {
-      if (item == eleWeek1Total || item == eleWeek2Total) return;
-      let timeInput = item.value;
-      if (timeRegExLong.test(timeInput)) {
-        timeArray = [...timeInput.matchAll(timeRegEx)];
-        startTime = toDateWithOutTimeZone(timeArray[0][0]);
-        endTime = toDateWithOutTimeZone(timeArray[1][0]);
-        timeDiff = (endTime - startTime) / 1000 / 60;
-        totalTime += timeDiff;
-      }
-    });
-  eleTotal.value = toTimePhrase(totalTime);
+  week1TotalTime = calculateWeek(week1inputs);
+  eleWeek1Total.value = toTimePhrase(week1TotalTime);
+  week2TotalTime = calculateWeek(week2inputs);
+  eleWeek2Total.value = toTimePhrase(week2TotalTime);
+
+  eleTotal.value = toTimePhrase(week1TotalTime + week2TotalTime);
+}
+
+function calculateWeek(inputs) {
+  let totalTime = 0;
+  inputs.forEach((item) => {
+    let timeInput = item.value;
+    if (timeRegExLong.test(timeInput)) {
+      timeArray = [...timeInput.matchAll(timeRegEx)];
+      startTime = toDateWithOutTimeZone(timeArray[0][0]);
+      endTime = toDateWithOutTimeZone(timeArray[1][0]);
+      timeDiff = (endTime - startTime) / 1000 / 60;
+      totalTime += timeDiff;
+    }
+  });
+  return totalTime;
 }
 
 function enableReadOnlyInputs() {
