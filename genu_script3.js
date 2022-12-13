@@ -1,3 +1,4 @@
+const lunchBreak = 30; // lunch break is 30 mins
 const timeRegExLong = new RegExp(
   "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]s?-s?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
 ); // Test for valid full string eg 09:00-10:00
@@ -20,6 +21,10 @@ function returnWeek2Total() {
   return document.querySelector(
     "#bundle-details-222 .custom_text .field.text[name='requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]']"
   );
+}
+
+function returnLunchCheckboxes() {
+  return document.querySelectorAll("#bundle-details-222 input[type=checkbox]");
 }
 
 function toDateWithOutTimeZone(date) {
@@ -55,6 +60,7 @@ function toTimePhrase(minutes) {
 function calcTime(event) {
   let timeArray = [];
   let target = event.target;
+  let lunchCheckBox = target.closest("input[type=checkbox]");
 
   if (!isInitComplete) genuCCInitit();
   if (
@@ -69,6 +75,8 @@ function calcTime(event) {
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
       endTime = toDateWithOutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
+      if (timeDiff > lunchBreak && lunchCheckBox.checked)
+        timeDiff -= lunchBreak;
       messageElement.classList.remove("warning");
       messageElement.innerHTML = toTimePhrase(timeDiff);
       calculateWeeks();
