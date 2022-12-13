@@ -52,8 +52,7 @@
     hsl(225deg 50% 50% / 34%) 80%,
     hsl(276deg 50% 50% / 42%)
   );
-  border-radius: 3px;
-  border: 1px solid hsl(276deg 50% 50% / 42%);
+  border-radius: 5px;
 }
 
 #bundle-details-222
@@ -106,23 +105,17 @@ div.custom_text:has(
 div.custom_text:has(
     .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]"]
   ) {
-  background: #c0c9ea2e;
+  background: #ffffff;
   padding: 15px !important;
 }
+
 #bundle-details-222
   .custom_text
   .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_11_387449]"],
 #bundle-details-222
   .custom_text
   .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]"] {
-  border-image: linear-gradient(
-      40deg,
-      hsl(225deg 50% 50% / 34%) 40%,
-      hsl(276deg 50% 50% / 42%)
-    )
-    1;
-
-  color: #414141;
+  border: none;
 }
 
 div.custom_text:has(
@@ -132,6 +125,6 @@ div.custom_text:has(
     .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]"]
   ) {
   padding: 10px !important;
-  border: 1px solid hsl(276deg 50% 50% / 42%);
+  border: 1px solid hsl(248deg 100% 50% / 32%);
   border-radius: 10px;
 }
