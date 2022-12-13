@@ -73,7 +73,7 @@ function calcTime(event) {
   if (target.type == "checkbox")
     // if checkbox change, find the textbox with the time values.
     target =
-      cb.parentElement.parentElement.previousElementSibling.querySelector(
+      target.parentElement.parentElement.previousElementSibling.querySelector(
         "input[type=text]"
       );
   // if text calculate the time and update the time label
