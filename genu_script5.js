@@ -60,19 +60,30 @@ function toTimePhrase(minutes) {
 function calcTime(event) {
   let timeArray = [];
   let target = event.target;
-  let lunchCheckBox =
-    target.parentElement.parentElement.nextElementSibling.querySelector(
-      "input[type=checkbox]"
-    );
 
+  // Ensure the initalisation has occurred
   if (!isInitComplete) genuCCInitit();
+  // Check parents to ensure we are calculating time only on the time elements
   if (
-    target.closest("#bundle-item-fields-222") != null &&
-    target.closest(".control-element") != null &&
-    target.type == "text"
-  ) {
+    target.closest("#bundle-item-fields-222") == null &&
+    target.closest(".control-element") == null
+  )
+    return;
+  // Calculate time if change occured on checkbox or text update
+  if (target.type == "checkbox")
+    // if checkbox change, find the textbox with the time values.
+    target =
+      cb.parentElement.parentElement.previousElementSibling.querySelector(
+        "input[type=text]"
+      );
+  // if text calculate the time and update the time label
+  if (target.type == "text") {
     let timeInput = target.value;
     let messageElement = target.nextElementSibling;
+    let lunchCheckBox =
+      target.parentElement.parentElement.nextElementSibling.querySelector(
+        "input[type=checkbox]"
+      );
     if (timeRegExLong.test(timeInput)) {
       timeArray = [...timeInput.matchAll(timeRegEx)];
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
