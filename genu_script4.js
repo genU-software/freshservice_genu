@@ -60,7 +60,10 @@ function toTimePhrase(minutes) {
 function calcTime(event) {
   let timeArray = [];
   let target = event.target;
-  let lunchCheckBox = target.closest("input[type=checkbox]");
+  let lunchCheckBox =
+    target.parentElement.parentElement.nextElementSibling.querySelector(
+      "input[type=checkbox]"
+    );
 
   if (!isInitComplete) genuCCInitit();
   if (
