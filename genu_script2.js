@@ -165,6 +165,8 @@ function calculateWeek(inputs) {
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
       endTime = toDateWithOutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
+      // if time is a negative ignore( This means the input is incorrect and the user needs to fix it )
+      if (timeDiff <= 0) return;
       if (timeDiff > lunchBreak && lunchCheckBox.checked)
         timeDiff -= lunchBreak;
       totalTime += timeDiff;

@@ -1,3 +1,16 @@
+.warning {
+  font-weight: bold;
+  color: #de3030;
+  max-width: 235px;
+  padding-top: 5px;
+  font-style: italic;
+  text-align: center;
+}
+
+input[type="text"]:has(+ .warning) {
+  background: hsla(0, 50%, 50%, 10%);
+}
+
 :is(
     #bundle-details-222
       .custom_text
@@ -11,6 +24,7 @@
   ) {
   pointer-events: none;
   user-select: none;
+  font-weight: bolder;
 }
 
 #bundle-item-fields-222
@@ -49,8 +63,9 @@
   padding: 20px !important;
   background: linear-gradient(
     40deg,
-    hsl(225deg 50% 50% / 34%) 80%,
-    hsl(276deg 50% 50% / 42%)
+    hsl(60deg 23% 95%) 60%,
+    hsla(227deg, 84%, 24%, 30%),
+    hsla(227deg, 84%, 24%, 60%)
   );
   border-radius: 5px;
 }
@@ -71,6 +86,7 @@ div.custom_text:has(
 div.custom_text:has(
     .field.text[name="requested_item_values[222][requested_item_value_attributes][cf_total_hours_week_2_387449]"]
   ) {
+  width: 800px;
   background: #ffffff;
   padding: 15px !important;
   border-radius: 10px;
