@@ -86,7 +86,7 @@ function calcTime(event) {
       "input[type=checkbox]"
     );
   if (!timeRegExLong.test(timeInput)) {
-    ShowTimeFormatErrorMessage();
+    ShowTimeFormatErrorMessage(messageElement);
     return;
   }
   timeArray = [...timeInput.matchAll(timeRegEx)];
@@ -95,7 +95,7 @@ function calcTime(event) {
   timeDiff = (endTime - startTime) / 1000 / 60;
   // if time is backwards stop and show warning message
   if (timeDiff < 0) {
-    ShowTimeFormatErrorMessage();
+    ShowTimeFormatErrorMessage(messageElement);
     return;
   }
   // Check to see if lunch checkbox has been selected, if so reduce total time by lunch break time
@@ -106,7 +106,7 @@ function calcTime(event) {
 }
 
 /* Show time format error message */
-function ShowTimeFormatErrorMessage() {
+function ShowTimeFormatErrorMessage(messageElement) {
   messageElement.innerHTML =
     "Time range incorrect. Time should be in 24 hour time eg. '09:00-15:06'";
   messageElement.classList.add("warning");
