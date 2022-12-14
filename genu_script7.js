@@ -1,6 +1,6 @@
 const lunchBreak = 30; // lunch break is 30 mins
 const timeRegExLong = new RegExp(
-  "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]s?-s?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
+  "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] *?- *?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
 ); // Test for valid full string eg 09:00-10:00
 const timeRegEx = new RegExp("([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]", "g"); // Match times from string
 var isInitComplete = false;
@@ -65,7 +65,7 @@ function calcTime(event) {
   if (!isInitComplete) genuCCInitit();
   // Check parents to ensure we are calculating time only on the time elements
   if (
-    target.closest("#bundle-item-fields-222") == null &&
+    target.closest("#bundle-item-fields-222") == null ||
     target.closest(".control-element") == null
   )
     return;
@@ -77,28 +77,39 @@ function calcTime(event) {
         "input[type=text]"
       );
   // if text calculate the time and update the time label
-  if (target.type == "text") {
-    let timeInput = target.value;
-    let messageElement = target.nextElementSibling;
-    let lunchCheckBox =
-      target.parentElement.parentElement.nextElementSibling.querySelector(
-        "input[type=checkbox]"
-      );
-    if (timeRegExLong.test(timeInput)) {
-      timeArray = [...timeInput.matchAll(timeRegEx)];
-      startTime = toDateWithOutTimeZone(timeArray[0][0]);
-      endTime = toDateWithOutTimeZone(timeArray[1][0]);
-      timeDiff = (endTime - startTime) / 1000 / 60;
-      if (timeDiff > lunchBreak && lunchCheckBox.checked)
-        timeDiff -= lunchBreak;
-      messageElement.classList.remove("warning");
-      messageElement.innerHTML = toTimePhrase(timeDiff);
-      calculateWeeks();
-    } else {
-      messageElement.innerHTML = "Time format incorrect. '09:00-5:06'";
-      messageElement.classList.add("warning");
-    }
+  if (target.type != "text") return;
+
+  let timeInput = target.value;
+  let messageElement = target.nextElementSibling;
+  let lunchCheckBox =
+    target.parentElement.parentElement.nextElementSibling.querySelector(
+      "input[type=checkbox]"
+    );
+  if (!timeRegExLong.test(timeInput)) {
+    ShowTimeFormatErrorMessage();
+    return;
   }
+  timeArray = [...timeInput.matchAll(timeRegEx)];
+  startTime = toDateWithOutTimeZone(timeArray[0][0]);
+  endTime = toDateWithOutTimeZone(timeArray[1][0]);
+  timeDiff = (endTime - startTime) / 1000 / 60;
+  // if time is backwards stop and show warning message
+  if (timeDiff < 0) {
+    ShowTimeFormatErrorMessage();
+    return;
+  }
+  // Check to see if lunch checkbox has been selected, if so reduce total time by lunch break time
+  if (timeDiff > lunchBreak && lunchCheckBox.checked) timeDiff -= lunchBreak;
+  messageElement.classList.remove("warning");
+  messageElement.innerHTML = toTimePhrase(timeDiff);
+  calculateWeeks();
+}
+
+/* Show time format error message */
+function ShowTimeFormatErrorMessage() {
+  messageElement.innerHTML =
+    "Time range incorrect. Time should be in 24 hour time eg. '09:00-15:06'";
+  messageElement.classList.add("warning");
 }
 
 /* Create new element tohold time information */
@@ -145,11 +156,17 @@ function calculateWeek(inputs) {
   let totalTime = 0;
   inputs.forEach((item) => {
     let timeInput = item.value;
+    let lunchCheckBox =
+      item.parentElement.parentElement.nextElementSibling.querySelector(
+        "input[type=checkbox]"
+      );
     if (timeRegExLong.test(timeInput)) {
       timeArray = [...timeInput.matchAll(timeRegEx)];
       startTime = toDateWithOutTimeZone(timeArray[0][0]);
       endTime = toDateWithOutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
+      if (timeDiff > lunchBreak && lunchCheckBox.checked)
+        timeDiff -= lunchBreak;
       totalTime += timeDiff;
     }
   });
