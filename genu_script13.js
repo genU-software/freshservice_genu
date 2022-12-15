@@ -135,7 +135,9 @@ function genuCCInitit() {
   isInitComplete = true;
 
   // Add event listener for time calculation
-  document.addEventListener("change", calcTime);
+  document.querySelectorAll("#page-main").forEach((item) => {
+    item.addEventListener("change", calcTime);
+  });
 
   // Initialize lunch checkboxes
   const lunchCheckboxes = getLunchCheckboxes();
