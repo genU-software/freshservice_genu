@@ -1,3 +1,4 @@
+// Constra
 const lunchBreak = 30; // lunch break is 30 mins
 const timeRegExLong = new RegExp(
   "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] *?- *?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
@@ -86,6 +87,10 @@ function calcTime(event) {
       "input[type=checkbox]"
     );
   if (!timeRegExLong.test(timeInput)) {
+    if (timeInput.length == 0) {
+      messageElement.classList.remove("warning");
+      messageElement.innerHTML = toTimePhrase(timeDiff);
+    }
     ShowTimeFormatErrorMessage(messageElement);
     return;
   }
