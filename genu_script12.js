@@ -31,18 +31,22 @@ const toDateWithoutTimeZone = (date) => {
   return dt;
 };
 
-const toTimeString = (minutes) => {
-  const hours = Math.floor(minutes / 60);
-  const minutes = minutes % 60;
-  return `${hours.toString().padStart(2, "0")}:${minutes
-    .toString()
-    .padStart(2, "0")}`;
-};
+function toTimeString(minutes) {
+  const m = Math.round(minutes % 60);
+  const h = Math.round((minutes - m) / 60);
+  let time =
+    (h < 10 ? "0" : "") +
+    h.toString() +
+    ":" +
+    (m < 10 ? "0" : "") +
+    m.toString();
+  return time;
+}
 
 const toTimePhrase = (minutes) => {
-  const hours = Math.floor(minutes / 60);
-  const minutes = minutes % 60;
-  return `${hours} hours ${minutes} minutes`;
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${h} hours ${m} minutes`;
 };
 
 // Event handler for changing time
