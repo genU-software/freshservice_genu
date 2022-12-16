@@ -188,13 +188,9 @@ function calculateWeek(inputs) {
 }
 
 function enableReadOnlyInputs() {
-  let eleTotal = returnTotalElement();
-  let eleWeek1Total = returnWeek1Total();
-  let eleWeek2Total = returnWeek2Total();
-
-  returnTotalElement.readOnly = true;
-  returnWeek1Total.readOnly = true;
-  returnWeek2Total.readOnly = true;
+  getTotalElement.readOnly = true;
+  getWeek1Total.readOnly = true;
+  getWeek2Total.readOnly = true;
 }
 
 function genuCCInitit() {
