@@ -145,3 +145,8 @@ function genuCCInitit() {
     checkbox.checked = true;
   });
 }
+
+window.onload = function () {
+  /* Add event listner to all time input fields */
+  document.querySelector("#page-main").addEventListener("change", calcTime);
+};
