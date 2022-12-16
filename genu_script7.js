@@ -118,7 +118,7 @@ function calcTime(event) {
   }
 
   messageElement.classList.remove("warning");
-  messageElement.innerHTML = `Total time: ${toTimePhrase(time)}${message}`;
+  messageElement.innerHTML = `Total time: ${toTimePhrase(timeDiff)}${message}`;
 
   // Calculate totals
   calculateWeeks();
