@@ -1,5 +1,5 @@
 // Constraints
-const lunchBreak = 30; // lunch break is 30 mins
+const LUNCH_BREAK = 30; // lunch break is 30 mins
 const timeRegExLong = new RegExp(
   "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] *?- *?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
 ); // Test for valid full string eg 09:00-10:00
@@ -126,9 +126,9 @@ function calcTime(event) {
 
 /* Create new element tohold time information */
 function addTimeMessage() {
-  let eleTotal = returnTotalElement();
-  let eleWeek1Total = returnWeek1Total();
-  let eleWeek2Total = returnWeek2Total();
+  let eleTotal = getTotalElement();
+  let eleWeek1Total = getWeek1Total();
+  let eleWeek2Total = getWeek2Total();
   if (!document.querySelectorAll(".timeMessage").length > 0) {
     document
       .querySelectorAll("#bundle-item-fields-222 .control-element input.text")
@@ -146,9 +146,9 @@ function addTimeMessage() {
 function calculateWeeks() {
   let week1TotalTime = 0;
   let week2TotalTime = 0;
-  let eleTotal = returnTotalElement();
-  let eleWeek1Total = returnWeek1Total();
-  let eleWeek2Total = returnWeek2Total();
+  let eleTotal = getTotalElement();
+  let eleWeek1Total = getWeek1Total();
+  let eleWeek2Total = getWeek2Total();
   // select all the inputs and group them into weeks
   let inputs = Array.from(
     document.querySelectorAll("#bundle-details-222 input.text:nth-child(1)")
@@ -174,8 +174,8 @@ function calculateWeek(inputs) {
       );
     if (timeRegExLong.test(timeInput)) {
       timeArray = [...timeInput.matchAll(timeRegEx)];
-      startTime = toDateWithOutTimeZone(timeArray[0][0]);
-      endTime = toDateWithOutTimeZone(timeArray[1][0]);
+      startTime = toDateWithoutTimeZone(timeArray[0][0]);
+      endTime = toDateWithoutTimeZone(timeArray[1][0]);
       timeDiff = (endTime - startTime) / 1000 / 60;
       // if time is a negative ignore( This means the input is incorrect and the user needs to fix it )
       if (timeDiff <= 0) return;
