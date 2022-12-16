@@ -179,8 +179,8 @@ function calculateWeek(inputs) {
       timeDiff = (endTime - startTime) / 1000 / 60;
       // if time is a negative ignore( This means the input is incorrect and the user needs to fix it )
       if (timeDiff <= 0) return;
-      if (timeDiff > lunchBreak && lunchCheckBox.checked)
-        timeDiff -= lunchBreak;
+      if (timeDiff > LUNCH_BREAK && lunchCheckBox.checked)
+        timeDiff -= LUNCH_BREAK;
       totalTime += timeDiff;
     }
   });
