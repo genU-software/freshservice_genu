@@ -5,7 +5,7 @@ const timeRegExLong = new RegExp(
 ); // Test for valid full string eg 09:00-10:00
 const timeRegEx = new RegExp("([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]", "g"); // Match times from string
 const TIME_REGEX =
-  /^([0-9]|0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]) *?- *?([0-9]|0[0-9]|1[0-9]|2[0-3]:[0-5][0-9])/;
+  /^((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])\s*-\s*((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])/;
 var isInitComplete = false;
 
 // Query selectors
