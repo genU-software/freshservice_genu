@@ -86,15 +86,10 @@ function calcTime(event) {
       "input[type=checkbox]"
     );
 
-  if (!TIME_REGEX.test(timeInput)) {
-    if (timeInput.length === 0) {
-      messageElement.classList.remove("warning");
-      messageElement.innerHTML = "";
-    } else {
-      messageElement.classList.add("warning");
-      messageElement.innerHTML =
-        "Please enter a valid time range. Time needs to be in 24 hour time eg. '09:00-17:06'";
-    }
+  if (!TIME_REGEX.test(timeInput) || timeInput.length == 0) {
+    messageElement.classList.add("warning");
+    messageElement.innerHTML =
+      "Please enter a valid time range. Time needs to be in 24 hour time eg. '09:00-17:06'";
     return;
   }
 
