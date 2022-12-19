@@ -168,10 +168,11 @@ function calculateWeek(inputs) {
       item.parentElement.parentElement.nextElementSibling.querySelector(
         "input[type=checkbox]"
       );
-    if (timeRegExLong.test(timeInput)) {
-      timeArray = [...timeInput.matchAll(timeRegEx)];
-      startTime = toDateWithoutTimeZone(timeArray[0][0]);
-      endTime = toDateWithoutTimeZone(timeArray[1][0]);
+    if (TIME_REGEX.test(timeInput)) {
+      const [start, end] = timeInput.match(TIME_REGEX).slice(1);
+      const startTime = toDateWithoutTimeZone(start);
+      const endTime = toDateWithoutTimeZone(end);
+
       timeDiff = (endTime - startTime) / 1000 / 60;
       // if time is a negative ignore( This means the input is incorrect and the user needs to fix it )
       if (timeDiff <= 0) return;
