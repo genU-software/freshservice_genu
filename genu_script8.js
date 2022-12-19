@@ -1,9 +1,6 @@
 // Constraints
 const LUNCH_BREAK = 30; // lunch break is 30 mins
-const timeRegExLong = new RegExp(
-  "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] *?- *?([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
-); // Test for valid full string eg 09:00-10:00
-const timeRegEx = new RegExp("([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]", "g"); // Match times from string
+// Test for valid full string eg 09:00-10:00
 const TIME_REGEX =
   /^((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])\s*-\s*((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])/;
 var isInitComplete = false;
@@ -86,11 +83,15 @@ function calcTime(event) {
       "input[type=checkbox]"
     );
 
-  if (!TIME_REGEX.test(timeInput) || timeInput.length == 0) {
-    messageElement.classList.add("warning");
-    messageElement.innerHTML =
-      "Please enter a valid time range. Time needs to be in 24 hour time eg. '09:00-17:06'";
-    return;
+  if (!TIME_REGEX.test(timeInput)) {
+    if (timeInput.length === 0) {
+      messageElement.classList.remove("warning");
+    } else {
+      messageElement.classList.add("warning");
+      messageElement.innerHTML =
+        "Please enter a valid time range. Time needs to be in 24 hour time eg. '09:00-17:06'";
+      return;
+    }
   }
 
   // Calculate time and update message
