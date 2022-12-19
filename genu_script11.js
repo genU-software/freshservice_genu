@@ -87,6 +87,8 @@ function calcTime(event) {
     if (timeInput.length === 0) {
       messageElement.classList.remove("warning");
       messageElement.innerHTML = "";
+      // Calculate totals
+      calculateWeeks();
     } else {
       messageElement.classList.add("warning");
       messageElement.innerHTML =
