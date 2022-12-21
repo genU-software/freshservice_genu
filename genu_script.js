@@ -113,11 +113,11 @@ function calcTime(event) {
 
   if (lunchCheckBox.checked) {
     timeDiff -= LUNCH_BREAK;
-    message = `<br>Minus lunch break of ${LUNCH_BREAK} minutes`;
+    message = `<br>Minus lunch break {${LUNCH_BREAK} minutes}`;
   }
 
   messageElement.classList.remove("warning");
-  messageElement.innerHTML = `Total time: ${toTimePhrase(timeDiff)}${message}`;
+  messageElement.innerHTML = `${toTimePhrase(timeDiff)}${message}`;
 
   // Calculate totals
   calculateWeeks();
