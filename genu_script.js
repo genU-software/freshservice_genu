@@ -160,7 +160,8 @@ function calculateWeeks() {
   week2TotalTime = calculateWeek(week2inputs);
   eleWeek2Total.value = toTimePhrase(week2TotalTime);
 
-  eleTotal.value = toTimePhrase(week1TotalTime + week2TotalTime);
+  if (week2TotalTime == 0) eleTotal.value = toTimePhrase(week1TotalTime * 2);
+  else eleTotal.value = toTimePhrase(week1TotalTime + week2TotalTime);
 }
 
 function calculateWeek(inputs) {
