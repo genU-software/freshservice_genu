@@ -1,5 +1,7 @@
 // Constraints
 const LUNCH_BREAK = 30; // lunch break is 30 mins
+const WARNING_MESSAGE =
+  "Time range must be in 24 hour format.</br> For example '09:00-17:06' using : and -";
 // Test for valid full string eg 09:00-10:00
 const TIME_REGEX =
   /^((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])\s*-\s*((?:[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])/;
@@ -91,8 +93,7 @@ function calcTime(event) {
       calculateWeeks();
     } else {
       messageElement.classList.add("warning");
-      messageElement.innerHTML =
-        "Please enter a valid time range. Time needs to be in 24 hour time eg. '09:00-17:06'";
+      messageElement.innerHTML = WARNING_MESSAGE;
     }
     return;
   }
