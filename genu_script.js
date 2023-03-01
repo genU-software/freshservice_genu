@@ -205,8 +205,12 @@ function genuCCInitit() {
 
 window.onload = function () {
   /* Add event listner to all time input fields */
-  document.querySelectorAll("#page-main").forEach((item) => {
-    item.addEventListener("change", calcTime);
-  });
+  document
+    .querySelectorAll(
+      "#page-main .field_placeholder_222_703d2c11-d469-4523-a431-60407e2a936a"
+    )
+    .forEach((item) => {
+      item.addEventListener("change", calcTime);
+    });
   console.log("genu script added");
 };
