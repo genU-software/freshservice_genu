@@ -207,7 +207,7 @@ window.onload = function () {
   /* Add event listner to all time input fields */
   document
     .querySelectorAll(
-      "#page-main .field_placeholder_222_703d2c11-d469-4523-a431-60407e2a936a"
+      "#page-main div.bundle-section[data-field-section='249~bundleitem_75000405014']"
     )
     .forEach((item) => {
       item.addEventListener("change", calcTime);
